@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: helloworld
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: helloworld
+            image: cronitor/cronitor-php:latest
+            args:
+            - -c
+            - date >> /tmp/date.txt
+          restartPolicy: OnFailure
